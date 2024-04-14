@@ -1,4 +1,4 @@
-module github.com/TobiasYin/go-lsp
+module github.com/MTBorg/go-lsp
 
 go 1.17
 
