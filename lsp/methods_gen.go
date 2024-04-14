@@ -986,11 +986,12 @@ func (m *Methods) prepareRename(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) prepareRenameMethodInfo() *jsonrpc.MethodInfo {
+
 	if m.onPrepareRename == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "textDocument/rename",
+		Name: "textDocument/prepareRename",
 		NewRequest: func() interface{} {
 			return &defines.PrepareRenameParams{}
 		},

@@ -202,7 +202,7 @@ var methods = []method{
 	},
 	{
 		Name:         "PrepareRename",
-		RegisterName: "textDocument/rename",
+		RegisterName: "textDocument/prepareRename",
 		Args:         defines.PrepareRenameParams{},
 		Result:       defines.Range{},
 	},
