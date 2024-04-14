@@ -3,6 +3,8 @@ package lsp
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path"
 	"reflect"
 	"strings"
 	"testing"
@@ -119,7 +121,18 @@ func generateOneNoResp(name, regName, args, error, code string, withBuiltin bool
 
 func TestMethodsGen(t *testing.T) {
 	res := generate(methods)
-	err := ioutil.WriteFile("/Users/tobias/projects/go-lsp/lsp/methods_gen.go", []byte(res), 0777)
+	cwd, err := os.Getwd()
+	if err != nil {
+		panic(fmt.Errorf("get cwd: %w", err))
+	}
+
+	// because this generation is run as part of a test, the cwd is changed to
+	// folder of the test. Therefore the cwd is not the root of the directory, it
+	// is the directory of this test file, so the "lsp" directory should not be
+	// added.
+	filename := path.Join(cwd, "methods_gen.go")
+
+	err = ioutil.WriteFile(filename, []byte(res), 0777)
 	if err != nil {
 		panic(err)
 	}
